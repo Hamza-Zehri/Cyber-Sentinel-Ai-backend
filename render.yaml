@@ -9,7 +9,7 @@ services:
         value: "3.11.7"
       - key: PYTHONUNBUFFERED
         value: "1"
-      - key: DATABASE_URL
-        value: sqlite:///./cybersentinel_prod.db
       - key: APP_ENV
         value: production
+      - key: JWT_SECRET_KEY
+        generateValue: true
