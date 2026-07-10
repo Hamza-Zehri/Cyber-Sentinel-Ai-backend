@@ -7,6 +7,8 @@ build/
 *.db
 reports/
 backups/
+frontend/dist/
+*.spec
 ai_models/*.joblib
 .vscode/
 .idea/

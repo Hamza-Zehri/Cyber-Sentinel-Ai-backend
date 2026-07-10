@@ -39,6 +39,9 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
+    # --- Frontend ---
+    FRONTEND_DIST: str = ""
+
     # --- CORS ---
     CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000,https://cyber-sentinel-ai-frontend.vercel.app,https://cyber-sentinel-ai-backend.onrender.com"
 

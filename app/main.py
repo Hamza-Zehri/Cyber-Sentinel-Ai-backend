@@ -3,9 +3,13 @@ Cyber Sentinel AI - Backend Application Entrypoint
 """
 import logging
 
+import os
+from pathlib import Path
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
@@ -83,3 +87,25 @@ app.include_router(settings_router.router, prefix=settings.API_V1_PREFIX)
 app.include_router(notifications_router.router, prefix=settings.API_V1_PREFIX)
 app.include_router(backups_router.router, prefix=settings.API_V1_PREFIX)
 app.include_router(credentials_router.router, prefix=settings.API_V1_PREFIX)
+
+# ---- Serve frontend static files (desktop app / local dev) ----
+_frontend_dist = settings.FRONTEND_DIST or str(Path(__file__).resolve().parent.parent / "frontend" / "dist")
+if os.path.isdir(_frontend_dist):
+    app.mount("/assets", StaticFiles(directory=os.path.join(_frontend_dist, "assets")), name="assets")
+    _index_path = os.path.join(_frontend_dist, "index.html")
+
+    @app.get("/favicon.svg")
+    def _favicon():
+        return FileResponse(os.path.join(_frontend_dist, "favicon.svg"))
+
+    @app.get("/icons.svg")
+    def _icons():
+        return FileResponse(os.path.join(_frontend_dist, "icons.svg"))
+
+    @app.get("/{full_path:path}")
+    async def _spa(full_path: str):
+        if full_path.startswith("api/"):
+            return JSONResponse(status_code=404, content={"detail": "Not found"})
+        return FileResponse(_index_path)
+
+    logger.info("Serving frontend from %s", _frontend_dist)
