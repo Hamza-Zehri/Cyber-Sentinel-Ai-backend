@@ -4,6 +4,7 @@ Cyber Sentinel AI - Backend Application Entrypoint
 import logging
 
 import os
+import sys
 from pathlib import Path
 
 from fastapi import FastAPI, Request
@@ -89,7 +90,8 @@ app.include_router(backups_router.router, prefix=settings.API_V1_PREFIX)
 app.include_router(credentials_router.router, prefix=settings.API_V1_PREFIX)
 
 # ---- Serve frontend static files (desktop app / local dev) ----
-_frontend_dist = settings.FRONTEND_DIST or str(Path(__file__).resolve().parent.parent / "frontend" / "dist")
+_base = getattr(sys, '_MEIPASS', Path(__file__).resolve().parent.parent)
+_frontend_dist = settings.FRONTEND_DIST or str(Path(_base) / "frontend" / "dist")
 if os.path.isdir(_frontend_dist):
     app.mount("/assets", StaticFiles(directory=os.path.join(_frontend_dist, "assets")), name="assets")
     _index_path = os.path.join(_frontend_dist, "index.html")
