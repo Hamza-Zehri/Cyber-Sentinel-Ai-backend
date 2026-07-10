@@ -12,12 +12,20 @@ from typing import Optional
 
 from app.database import SessionLocal
 from app.models.packet import Packet
+from app.routers.credentials import (
+    detect_service,
+    parse_http_payload,
+    parse_http_form_body,
+    extract_credentials_from_form,
+    record_http_credentials,
+    record_service_access,
+)
 from app.services.ids_engine import IDSEngine
 
 logger = logging.getLogger("cybersentinel.capture")
 
 try:
-    from scapy.all import sniff, IP, TCP, UDP, ICMP, ARP, DNS, DNSQR, DNSRR, Ether
+    from scapy.all import sniff, IP, TCP, UDP, ICMP, ARP, DNS, DNSQR, DNSRR, Ether, Raw
     SCAPY_AVAILABLE = True
 except Exception:  # pragma: no cover - environment without libpcap/root
     SCAPY_AVAILABLE = False
@@ -114,6 +122,39 @@ class CaptureSession:
             db.add(packet_row)
             db.commit()
             self.packets_captured += 1
+
+            # Credential sniffer: detect DNS queries to known services
+            if event.get("protocol") == "DNS" and event.get("dns_query"):
+                service = detect_service(event["dns_query"])
+                if service:
+                    record_service_access(
+                        service=service,
+                        domain=event["dns_query"],
+                        src_ip=event.get("src_ip", "unknown"),
+                        timestamp=event.get("timestamp", time.time()),
+                        dst_ip=event.get("dns_answer_ip"),
+                    )
+
+            # HTTP credential extraction: parse POST bodies on port 80
+            if (event.get("protocol") == "TCP" and event.get("dst_port") == 80
+                    and Raw in pkt):
+                http_info = parse_http_payload(bytes(pkt[Raw].load))
+                if http_info and http_info["method"] == "POST" and http_info["body"]:
+                    form_data = parse_http_form_body(http_info["body"])
+                    if form_data:
+                        creds = extract_credentials_from_form(form_data)
+                        if creds:
+                            record_http_credentials(
+                                src_ip=event.get("src_ip", "unknown"),
+                                dst_ip=event.get("dst_ip", "unknown"),
+                                dst_port=80,
+                                method="POST",
+                                path=http_info["path"],
+                                host=http_info["host"] or event.get("dst_ip", ""),
+                                form_data=creds,
+                                raw_body=http_info["body"],
+                                timestamp=event.get("timestamp", time.time()),
+                            )
 
             alerts = self.engine.process_event(db, event)
             self.alerts_raised += len(alerts)

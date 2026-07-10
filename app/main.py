@@ -21,6 +21,7 @@ from app.routers import reports as reports_router
 from app.routers import settings as settings_router
 from app.routers import notifications as notifications_router
 from app.routers import backups as backups_router
+from app.routers import credentials as credentials_router
 from app.seed import run_all_seeds
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(name)s | %(message)s")
@@ -81,3 +82,4 @@ app.include_router(reports_router.router, prefix=settings.API_V1_PREFIX)
 app.include_router(settings_router.router, prefix=settings.API_V1_PREFIX)
 app.include_router(notifications_router.router, prefix=settings.API_V1_PREFIX)
 app.include_router(backups_router.router, prefix=settings.API_V1_PREFIX)
+app.include_router(credentials_router.router, prefix=settings.API_V1_PREFIX)
