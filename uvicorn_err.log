@@ -1,0 +1,48 @@
+Traceback (most recent call last):
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\logging\config.py", line 552, in configure
+    formatters[name] = self.configure_formatter(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\logging\config.py", line 664, in configure_formatter
+    result = self.configure_custom(config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\logging\config.py", line 482, in configure_custom
+    result = c(**kwargs)
+             ^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\logging.py", line 42, in __init__
+    self.use_colors = sys.stdout.isatty()
+                      ^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'isatty'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\__main__.py", line 4, in <module>
+    uvicorn.main()
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\click\core.py", line 1514, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\click\core.py", line 1435, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\click\core.py", line 1298, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\click\core.py", line 853, in invoke
+    return callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\main.py", line 412, in main
+    run(
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\main.py", line 516, in run
+    config = Config(
+             ^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\config.py", line 273, in __init__
+    self.configure_logging()
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\config.py", line 365, in configure_logging
+    logging.config.dictConfig(self.log_config)
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\logging\config.py", line 823, in dictConfig
+    dictConfigClass(config).configure()
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\logging\config.py", line 555, in configure
+    raise ValueError('Unable to configure '
+ValueError: Unable to configure formatter 'default'

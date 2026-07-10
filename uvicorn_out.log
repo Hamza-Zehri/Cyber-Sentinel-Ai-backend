@@ -1,0 +1,181 @@
+INFO:     Will watch for changes in these directories: ['C:\\Projects\\CyberSentinelAI\\backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [6744] using WatchFiles
+WARNING: No libpcap provider available ! pcap won't be used
+INFO:     Started server process [1808]
+INFO:     Waiting for application startup.
+2026-07-10 15:04:43,015 | INFO | cybersentinel | Starting Cyber Sentinel AI (development environment)
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 146, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 3302, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\base.py", line 712, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\base.py", line 674, in __init__
+    self.__connect()
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\default.py", line 621, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\routing.py", line 133, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\routing.py", line 133, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\routing.py", line 133, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\routing.py", line 133, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 569, in __aenter__
+    await self._router.startup()
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 672, in startup
+    handler()
+  File "C:\Projects\CyberSentinelAI\backend\app\main.py", line 50, in on_startup
+    init_db()
+  File "C:\Projects\CyberSentinelAI\backend\app\database.py", line 36, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\sql\schema.py", line 5868, in create_all
+    bind._run_ddl_visitor(
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 3252, in _run_ddl_visitor
+    with self.begin() as conn:
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 3242, in begin
+    with self.connect() as conn:
+         ^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 3278, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 148, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 2442, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 146, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\base.py", line 3302, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\base.py", line 712, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\base.py", line 674, in __init__
+    self.__connect()
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\pool\base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\engine\default.py", line 621, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Engr. Hamza Asad\AppData\Local\Programs\Python\Python311\Lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+ERROR:    Application startup failed. Exiting.
+WARNING:  WatchFiles detected changes in 'app\config.py'. Reloading...
+WARNING: No libpcap provider available ! pcap won't be used
+WARNING:  WatchFiles detected changes in 'app\database.py'. Reloading...
+INFO:     Started server process [7984]
+INFO:     Waiting for application startup.
+2026-07-10 15:05:54,736 | INFO | cybersentinel | Starting Cyber Sentinel AI (development environment)
+2026-07-10 15:05:54,759 | INFO | cybersentinel | Startup complete. Database ready and seeded.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:64613 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55990 - "GET /api/openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55997 - "POST /api/v1/ai/password/analyze HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:59409 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55193 - "POST /api/v1/ai/password/analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61789 - "GET /api/docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61789 - "GET /api/openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53295 - "POST /api/v1/ai/password/analyze HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60127 - "GET /api/docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60127 - "GET /api/openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49705 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51932 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62435 - "GET /api/v1/settings HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62436 - "GET /api/v1/notifications/unread-count HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59308 - "GET /api/openapi.json HTTP/1.1" 200 OK
