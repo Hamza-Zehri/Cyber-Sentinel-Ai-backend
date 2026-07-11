@@ -92,22 +92,22 @@ app.include_router(credentials_router.router, prefix=settings.API_V1_PREFIX)
 # ---- Serve frontend static files (desktop app / local dev) ----
 _base = getattr(sys, '_MEIPASS', Path(__file__).resolve().parent.parent)
 _frontend_dist = settings.FRONTEND_DIST or str(Path(_base) / "frontend" / "dist")
-if os.path.isdir(_frontend_dist):
+_index_path = os.path.join(_frontend_dist, "index.html")
+_has_frontend = os.path.isfile(_index_path)
+
+if _has_frontend:
     app.mount("/assets", StaticFiles(directory=os.path.join(_frontend_dist, "assets")), name="assets")
-    _index_path = os.path.join(_frontend_dist, "index.html")
-
-    @app.get("/favicon.svg")
-    def _favicon():
-        return FileResponse(os.path.join(_frontend_dist, "favicon.svg"))
-
-    @app.get("/icons.svg")
-    def _icons():
-        return FileResponse(os.path.join(_frontend_dist, "icons.svg"))
-
-    @app.get("/{full_path:path}")
-    async def _spa(full_path: str):
-        if full_path.startswith("api/"):
-            return JSONResponse(status_code=404, content={"detail": "Not found"})
-        return FileResponse(_index_path)
-
     logger.info("Serving frontend from %s", _frontend_dist)
+
+@app.get("/")
+@app.get("/{full_path:path}")
+async def _spa(full_path: str = ""):
+    if full_path.startswith("api/") or full_path.startswith("docs") or full_path.startswith("redoc"):
+        return JSONResponse(status_code=404, content={"detail": "Not found"})
+    if _has_frontend:
+        return FileResponse(_index_path)
+    return JSONResponse(status_code=200, content={
+        "status": "running",
+        "app": settings.APP_NAME,
+        "frontend": "not available (run with FRONTEND_DIST or use http://localhost:5173 in dev)",
+    })
