@@ -1,6 +1,6 @@
 @echo off
 REM Cyber Sentinel AI - Desktop App Builder
-REM Run this from the backend directory to build the standalone .exe
+REM Run this from the backend directory to build the standalone .exe and installer
 REM
 REM Prerequisites:
 REM   1. Python 3.11+ installed
@@ -47,23 +47,25 @@ if %ERRORLEVEL% neq 0 (
     exit /b 1
 )
 echo.
-echo Executable built: dist\CyberSentinel\CyberSentinel.exe
+echo Executable built: dist\CyberSentinel.exe
 
-REM ---- Step 5: Build installer (optional) ----
-echo [5/5] Checking for Inno Setup...
+REM ---- Step 5: Build installer ----
+echo [5/5] Building installer with Inno Setup...
 where iscc >nul 2>nul
 if %ERRORLEVEL% equ 0 (
-    echo Building installer with Inno Setup...
     iscc installer.iss
+    echo.
     echo Installer built: dist\installer\CyberSentinelAI-Setup.exe
 ) else (
-    echo Inno Setup not found. Skipping installer build.
-    echo To build the installer, install Inno Setup from: https://jrsoftware.org/isdl.php
+    echo ERROR: Inno Setup not found. Install from: https://jrsoftware.org/isdl.php
+    exit /b 1
 )
 
 echo.
 echo === Build complete! ===
 echo.
-echo The executable is at: dist\CyberSentinel\CyberSentinel.exe
-echo Run it as Administrator to enable packet capture.
+echo Installer: dist\installer\CyberSentinelAI-Setup.exe
+echo Standalone: dist\CyberSentinel.exe
+echo.
+echo Run the installed app as Administrator to enable packet capture.
 pause
