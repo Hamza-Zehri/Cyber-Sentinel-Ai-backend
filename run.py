@@ -14,15 +14,16 @@ import uvicorn
 os.environ["APP_ENV"] = "development"
 os.environ["FRONTEND_DIST"] = os.path.join(os.path.dirname(os.path.abspath(__file__)), "frontend", "dist")
 
-PORT = 8000
+_HOST = os.getenv("HOST", "0.0.0.0")
+_PORT = int(os.getenv("PORT", os.getenv("CYBER_PORT", "8000")))
 
 
 def open_browser():
     time.sleep(2)
-    webbrowser.open(f"http://localhost:{PORT}")
+    webbrowser.open(f"http://localhost:{_PORT}")
 
 
 if __name__ == "__main__":
-    print(f"Starting Cyber Sentinel AI on http://localhost:{PORT}")
+    print(f"Starting Cyber Sentinel AI on http://localhost:{_PORT}")
     threading.Thread(target=open_browser, daemon=True).start()
-    uvicorn.run("app.main:app", host="0.0.0.0", port=PORT, reload=False)
+    uvicorn.run("app.main:app", host=_HOST, port=_PORT, reload=False)
